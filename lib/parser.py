@@ -1,8 +1,43 @@
 # -*- coding: utf-8 -*-
 
 global commonInfos
-commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric", "Circle", "Album", "Release Date", "Illustration", "Translation", "Original artist", "Original source", "Remix", "Website", "Background Image", "Guitar"]
+commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric",
+               "Circle", "Album", "Release Date", "Illustration", "Translation",
+               "Original artist", "Original source", "Remix", "Website", "Background Image",
+               "Guitar", "Source"]
 seperators = ["：", ":", " - "]
+
+
+def patchInfo(info):
+  # sRvtSH1_H0w
+  info = info.replace("Released Date", "Release Date")
+
+  # l4GQYBI4DBM
+  info = info.replace("track name", "Title").replace("arranged by", "Arrangement").replace("album", "Album")
+
+  # uSgHhzcvHfM
+  info = info.replace("Vo", "Vocal").replace("Arrange", "Arrangement")
+
+  # _lA8C48FlDw
+  info = info.replace("( ", "(").replace(" )", ")")
+
+  # -OzNzdlsocw
+  info = info.replace("Vocals", "Vocal").replace("Lyrics", "Lyric").replace("Artwork", "Illustration")
+
+  # mVYKcTxKro0
+  info = info.replace("Arranger", "Arrangement").replace("Remixed by", "Remix").replace("Picture source", "Illustration")
+
+  # 6zG5hmr-RvY
+  info = info.replace("Image", "Illustration").replace("background image", "Background Image").replace("歌詞／Lyric", "")
+
+  # l_rBFAJo1e0
+  info = info.replace("Song:", "Title:")
+
+  # jTgYtkc4kgg
+  info = info.replace("Song title", "Title").replace("Original song", "Original").replace("Translated by", "Translation")\
+             .replace("HP:", "Website:")
+
+  return info
 
 
 def stripKeyword(line, keyword):
@@ -22,30 +57,6 @@ def commonDetection(lines, keywords):
     # eVyR48O26BA
     if "Track List" in line:
       return {}
-
-    # sRvtSH1_H0w
-    line = line.replace("Released Date", "Release Date")
-
-    # l4GQYBI4DBM
-    line = line.replace("track name", "Title").replace("arranged by", "Arrangement").replace("album", "Album")
-
-    # uSgHhzcvHfM
-    line = line.replace("Vo", "Vocal").replace("Arrange", "Arrangement")
-
-    # _lA8C48FlDw
-    line = line.replace("( ", "(").replace(" )", ")")
-
-    # -OzNzdlsocw
-    line = line.replace("Vocals", "Vocal").replace("Lyrics", "Lyric").replace("Artwork", "Illustration")
-
-    # mVYKcTxKro0
-    line = line.replace("Arranger", "Arrangement").replace("Remixed by", "Remix").replace("Picture source", "Illustration")
-
-    # 6zG5hmr-RvY
-    line = line.replace("Image", "Illustration").replace("background image", "Background Image").replace("歌詞／Lyric", "")
-
-    # l_rBFAJo1e0
-    line = line.replace("Song", "Title")
 
     for keyword in keywords:
       if keyword not in ret and keyword in line:
@@ -78,7 +89,7 @@ parsers = [
 
 
 def parseVideoInfo(info):
-  info = info.split("\n")
+  info = patchInfo(info).split("\n")
 
   ret = {}
   for parser in parsers:
