@@ -3,7 +3,14 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib"))
 import api
-from utils import commonAttribs, commonAttribValues, choose, printMatch
+from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId
+
+
+def promptVideoId():
+  try:
+    return parseVideoId(input("Video id or link (Ex. dQw4w9WgXcQ): "))
+  except Exception:
+    print("Invalid id or link!")
 
 
 def listVideoInfo(videoId):
@@ -46,10 +53,16 @@ def main():
     if optionChose == 0:
       query()
     elif optionChose == 1:
-      videoId = input("Video id (Ex. dQw4w9WgXcQ): ")
+      try:
+        videoId = promptVideoId()
+      except Exception:
+        continue
       print(api.findLyrics(videoId))
     elif optionChose == 2:
-      videoId = input("Video id (Ex. dQw4w9WgXcQ): ")
+      try:
+        videoId = promptVideoId()
+      except Exception:
+        continue
       listVideoInfo(videoId)
     elif optionChose == 8:
       api.updateDatabase()

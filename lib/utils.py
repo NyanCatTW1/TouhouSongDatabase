@@ -1,4 +1,6 @@
 import romkan
+import urllib.parse as urlparse
+from urllib.parse import parse_qs
 
 
 def s(num, suffix="s"):
@@ -77,3 +79,15 @@ def choose(items):
       return choose
     except Exception:
       print("Invalid option! Try again")
+
+
+def parseVideoId(url):
+  url = url.strip()
+  try:
+    parsed = parse_qs(urlparse.urlparse(url).query)['v'][0]
+    return parsed
+  except ValueError:
+    if len(url) == 11:
+      return url
+    else:
+      raise ValueError
