@@ -1,0 +1,79 @@
+import romkan
+
+
+def s(num, suffix="s"):
+  return suffix if num > 1 else ""
+
+
+def sumAttribs(dict):
+  ret = 0
+  for value in dict.values():
+    ret += len(value)
+  return ret
+
+
+def dbStatus(videos):
+  attribs = sumAttribs(videos)
+  print("Storing {} attribute{} of {} video{} in the database".format(attribs, s(attribs), len(videos), s(len(videos))))
+
+
+def descendingDict(dict):
+  return sorted(list(dict.items()), key=lambda x: x[1], reverse=True)
+
+
+def commonAttribs(videos):
+  count = {}
+  for video in videos.values():
+    for attrib in video:
+      if attrib not in count:
+        count[attrib] = 1
+      else:
+        count[attrib] += 1
+  return descendingDict(count)
+
+
+def commonAttribValues(videos, target):
+  count = {}
+  for video in videos.values():
+    if target in video:
+      if isinstance(video[target], list):
+        for value in video[target]:
+          if value not in count:
+            count[value] = 1
+          else:
+            count[value] += 1
+      else:
+        if video[target] not in count:
+          count[video[target]] = 1
+        else:
+          count[video[target]] += 1
+  return descendingDict(count)
+
+
+def printMatch(videos, attrib, value):
+  matches = []
+  for video in videos.keys():
+    if attrib in videos[video]:
+      if (isinstance(videos[video][attrib], list) and value in videos[video][attrib]) or videos[video][attrib] == value:
+        print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
+        matches.append(video)
+  if len(matches) > 50:
+    print("WARNING: There are more than 50 matches, the playlist below will be limited to first 50 matches.")
+  print("Playlist: https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
+
+
+def toRomaji(line):
+  return romkan.to_hepburn(line)
+
+
+def choose(items):
+  while True:
+    try:
+      print("Please choose the target:")
+      for i in range(len(items) - 1, -1, -1):
+        print("{}: {} ({})".format(i, items[i][0], items[i][1]))
+      choose = int(input("Choose (0~{}): ".format(len(items) - 1)))
+      assert choose >= 0 and choose < len(items)
+      return choose
+    except Exception:
+      print("Invalid option! Try again")
