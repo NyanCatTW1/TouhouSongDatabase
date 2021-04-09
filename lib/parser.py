@@ -37,6 +37,9 @@ def patchInfo(info):
   info = info.replace("Song title", "Title").replace("Original song", "Original").replace("Translated by", "Translation")\
              .replace("HP:", "Website:")
 
+  # l_rBFAJo1e0
+  info = info.replace("Original theme:", "Original:")
+
   return info
 
 
