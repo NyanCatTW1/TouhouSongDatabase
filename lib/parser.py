@@ -48,6 +48,9 @@ def patchInfo(info):
   # XO3JH6NdyDQ
   info = info.replace("Released:", "Release Date:")
 
+  # FyVXpCSjApg
+  info = info.replace("Pic source:", "Illustration:").replace("original Title:", "")
+
   return info
 
 
