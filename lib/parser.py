@@ -4,7 +4,7 @@ global commonInfos
 commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric",
                "Circle", "Album", "Release Date", "Illustration", "Translation",
                "Original artist", "Original source", "Remix", "Website", "Background Image",
-               "Guitar", "Source", "Length"]
+               "Guitar", "Source", "Length", "Event"]
 seperators = ["：", ":", " - "]
 
 
@@ -44,6 +44,9 @@ def patchInfo(info):
   info = info.replace("title:", "Title:").replace("length:", "Length:").replace("arrangement:", "Arrangement:")\
              .replace("vocal:", "Vocal:").replace("original:", "Original:").replace("source:", "Source:")\
              .replace("PV:", "Illustration:")
+
+  # XO3JH6NdyDQ
+  info = info.replace("Released:", "Release Date:")
 
   return info
 
