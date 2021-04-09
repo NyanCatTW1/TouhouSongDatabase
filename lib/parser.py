@@ -2,7 +2,7 @@
 
 global commonInfos
 commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric", "Circle", "Album", "Release Date", "Illustration", "Translation", "Original artist", "Original source", "Remix", "Website", "Background Image", "Guitar"]
-seperators = ["：", ":"]
+seperators = ["：", ":", " - "]
 
 
 def stripKeyword(line, keyword):
