@@ -2,9 +2,9 @@
 
 global commonInfos
 commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric",
-               "Circle", "Album", "Release Date", "Illustration", "Translation",
-               "Original artist", "Original source", "Remix", "Website", "Background Image",
-               "Guitar", "Source", "Length", "Event"]
+               "Circle", "Album", "Release Date", "Translation", "Original artist",
+               "Original source", "Remix", "Website", "Background Image", "Guitar",
+               "Source", "Length", "Event"]
 seperators = ["：", ":", " - "]
 
 
@@ -96,9 +96,25 @@ def detectMultiline(lines, keyword):
   return {keyword: ret} if len(ret) > 0 else {}
 
 
+def illustrationParser(lines):
+  ret = []
+  for i in range(len(lines)):
+    if "Illustration" in lines[i]:
+      ret.append(stripKeyword(lines[i], "Illustration"))
+      try:
+        if lines[i + 1].startswith("http"):
+          ret.append(lines[i + 1])
+      except Exception:
+        pass
+      finally:
+        break
+  return {"Illustration": ret} if len(ret) > 0 else {}
+
+
 parsers = [
   lambda lines: commonDetection(lines, commonInfos),
-  lambda lines: detectMultiline(lines, "Original")
+  lambda lines: detectMultiline(lines, "Original"),
+  lambda lines: illustrationParser(lines)
 ]
 
 
