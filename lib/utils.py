@@ -86,7 +86,7 @@ def parseVideoId(url):
   try:
     parsed = parse_qs(urlparse.urlparse(url).query)['v'][0]
     return parsed
-  except ValueError:
+  except Exception:
     if len(url) == 11:
       return url
     else:

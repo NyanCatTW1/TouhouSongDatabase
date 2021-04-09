@@ -11,6 +11,7 @@ def promptVideoId():
     return parseVideoId(input("Video id or link (Ex. dQw4w9WgXcQ): "))
   except Exception:
     print("Invalid id or link!")
+    raise ValueError
 
 
 def listVideoInfo(videoId):
