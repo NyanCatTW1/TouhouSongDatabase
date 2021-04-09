@@ -44,6 +44,9 @@ def commonDetection(lines, keywords):
     # 6zG5hmr-RvY
     line = line.replace("Image", "Illustration").replace("background image", "Background Image").replace("歌詞／Lyric", "")
 
+    # l_rBFAJo1e0
+    line = line.replace("Song", "Title")
+
     for keyword in keywords:
       if keyword not in ret and keyword in line:
         if mengYueWorkaround and i < 2:

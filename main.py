@@ -34,7 +34,7 @@ def main():
       print("0. Query the database")
       print("1. Attempt to find the lyrics for a video in comment section (YouTube API key needed)")
       print("2. List info about a video in the database")
-      print("8. Update the database (YouTube API key needed, may be broken)")
+      print("8. Update the database (YouTube API key needed)")
       print("9: Leave")
       try:
         optionChose = int(input("Choose: "))
