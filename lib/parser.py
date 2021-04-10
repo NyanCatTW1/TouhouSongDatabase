@@ -4,7 +4,7 @@ global commonInfos
 commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric",
                "Circle", "Album", "Release Date", "Translation", "Original artist",
                "Original source", "Remix", "Website", "Background Image", "Guitar",
-               "Source", "Length", "Event"]
+               "Source", "Length", "Event", "Genre"]
 seperators = ["：", ":", " - "]
 
 
@@ -50,6 +50,9 @@ def patchInfo(info):
 
   # FyVXpCSjApg
   info = info.replace("Pic source:", "Illustration:").replace("original Title:", "")
+
+  # Qu_OzBsgRcI
+  info = info.replace("Album Genre:", "Genre:").replace("Illustration Source:", "Illustration:")
 
   return info
 
@@ -102,7 +105,7 @@ def illustrationParser(lines):
     if "Illustration" in lines[i]:
       ret.append(stripKeyword(lines[i], "Illustration"))
       try:
-        if lines[i + 1].startswith("http"):
+        if "http" in lines[i + 1]:
           ret.append(lines[i + 1])
       except Exception:
         pass
