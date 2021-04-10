@@ -57,6 +57,11 @@ def patchInfo(info):
   # lCQ7WuYXIHg
   info = info.replace("TITLE:", "Title:").replace("lyrics:", "Lyrics:").replace("Original title:", "Original:")
 
+  # hRmrbi8wDb0
+  info = info.replace("Vocals by:", "Vocal:").replace("Lyrics by:", "Lyrics:").replace("Arrangement by:", "Arrangement:")\
+             .replace("Album name:", "Album:").replace("Circle name:", "Circle:").replace("Original Song", "Original")\
+             .replace("Picture by:", "Illustration:")
+
   return info
 
 
