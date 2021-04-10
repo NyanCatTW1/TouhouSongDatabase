@@ -113,8 +113,9 @@ def illustrationParser(lines):
     if "Illustration" in lines[i]:
       ret.append(stripKeyword(lines[i], "Illustration"))
       try:
-        if "http" in lines[i + 1]:
+        while "http" in lines[i + 1]:
           ret.append(lines[i + 1])
+          i += 1
       except Exception:
         pass
       finally:
