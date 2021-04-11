@@ -62,6 +62,9 @@ def patchInfo(info):
              .replace("Album name:", "Album:").replace("Circle name:", "Circle:").replace("Original Song", "Original")\
              .replace("Picture by:", "Illustration:")
 
+  # _Zjhu4OfY6s
+  info = info.replace("Release:", "Release Date:")
+
   return info
 
 
@@ -100,7 +103,7 @@ def detectMultiline(lines, keyword):
       if keyword in line:
         begin = True
         ret.append(stripKeyword(line, keyword))
-    elif len(line.strip()) > 0:
+    elif len(line.strip()) > 0 and not any(sep in line for sep in seperators):
       ret.append(line.strip())
     else:
       break
