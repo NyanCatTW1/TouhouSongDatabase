@@ -84,6 +84,9 @@ def patchInfo(info):
   # Ak8AFx3pWSA
   info = info.replace("Picture artist:", "Illustration:")
 
+  # jq77hb2OVOs
+  info = info.replace("Imagen de:", "Illustration:")
+
   return info
 
 
