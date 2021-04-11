@@ -28,10 +28,25 @@ def query():
   attribs = commonAttribs(api.videos)
   attribChose = choose(attribs)
 
-  attribValues = commonAttribValues(api.videos, attribs[attribChose][0])
-  valueChose = choose(attribValues)
+  while True:
+    print("Choose query method:")
+    print("0. List all kinds of value and let me choose one")
+    print("1. Find everything that matches my following input")
+    try:
+      optionChose = int(input("Choose: "))
+      assert optionChose in [0, 1]
+      break
+    except Exception:
+      print("Invalid option! Try again")
 
-  printMatch(api.videos, attribs[attribChose][0], attribValues[valueChose][0])
+  if optionChose == 0:
+    attribValues = commonAttribValues(api.videos, attribs[attribChose][0])
+    valueChose = choose(attribValues)
+
+    printMatch(api.videos, attribs[attribChose][0], attribValues[valueChose][0])
+  elif optionChose == 1:
+    target = input("Search for: ")
+    printMatch(api.videos, attribs[attribChose][0], target, False)
 
 
 def main():

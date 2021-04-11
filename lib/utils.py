@@ -52,15 +52,30 @@ def commonAttribValues(videos, target):
   return descendingDict(count)
 
 
-def printMatch(videos, attrib, value):
+def printMatch(videos, attrib, value, exact=True):
   matches = []
   for video in videos.keys():
     if attrib in videos[video]:
-      if (isinstance(videos[video][attrib], list) and value in videos[video][attrib]) or videos[video][attrib] == value:
+      match = False
+      if isinstance(videos[video][attrib], list):
+        if value in videos[video][attrib]:
+          match = True
+        elif not exact and any(value.lower() in line.lower() for line in videos[video][attrib]):
+          match = True
+      else:
+        if videos[video][attrib] == value:
+          match = True
+        elif not exact and value.lower() in videos[video][attrib].lower():
+          match = True
+
+      if match:
         print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
         matches.append(video)
   if len(matches) > 50:
     print("WARNING: There are more than 50 matches, the playlist below will be limited to first 50 matches.")
+  elif len(matches) == 0:
+    print("No matches.")
+    return
   print("Playlist: https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
 
 
