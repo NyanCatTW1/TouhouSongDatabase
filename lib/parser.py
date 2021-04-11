@@ -93,6 +93,9 @@ def patchInfo(info):
   # 4m5q-NMfYIE
   info = info.replace("circle:", "Circle:").replace("translation:", "Translation:").replace("image:", "Illustration:")
 
+  # y30xoRA25jM
+  info = info.replace("Release event:", "Event:").replace("Pics:", "Illustration:")
+
   return info
 
 
