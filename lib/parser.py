@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 global commonInfos
-commonInfos = ["Title", "Artist", "Vocal", "Arrangement", "Lyric",
-               "Circle", "Album", "Release Date", "Translation", "Original artist",
-               "Original source", "Remix", "Website", "Background Image", "Guitar",
-               "Source", "Length", "Event", "Genre", "Character"]
+commonInfos = ["Title", "Channel", "Artist", "Vocal", "Arrangement",
+               "Lyric", "Circle", "Album", "Release Date", "Translation",
+               "Original artist", "Original source", "Remix", "Website", "Background Image",
+               "Illustration", "Guitar", "Source", "Length", "Event",
+               "Genre", "Character"]
 seperators = ["：", ":", " - "]
 
 
@@ -91,7 +92,7 @@ def stripKeyword(line, keyword):
   return keyword.join(line.split(keyword)[1:]).strip()
 
 
-def commonDetection(lines, keywords):
+def commonDetection(lines, keywords, channelName):
   ret = {}
   mengYueWorkaround = "這是" in lines[0]
   for i in range(len(lines)):
@@ -142,17 +143,18 @@ def illustrationParser(lines):
 
 
 parsers = [
-  lambda lines: commonDetection(lines, commonInfos),
-  lambda lines: detectMultiline(lines, "Original"),
-  lambda lines: illustrationParser(lines)
+  lambda lines, channelName: commonDetection(lines, commonInfos, channelName),
+  lambda lines, channelName: detectMultiline(lines, "Original"),
+  lambda lines, channelName: illustrationParser(lines),
+  lambda lines, channelName: {"Channel": channelName}
 ]
 
 
-def parseVideoInfo(info):
+def parseVideoInfo(info, channelName):
   info = patchInfo(info).split("\n")
 
   ret = {}
   for parser in parsers:
-    ret = ret | parser(info)
+    ret = {**ret, **parser(info, channelName)}
 
   return ret

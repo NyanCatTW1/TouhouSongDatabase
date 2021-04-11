@@ -69,22 +69,22 @@ def getVideoInfo(videoId):
   return ret
 
 
-def parseVideoInfos(videoInfos):
+def parseVideoInfos(videoInfos, channelName):
   ret = {}
   for id in videoInfos.keys():
-    ret[id] = parseVideoInfo(videoInfos[id])
+    ret[id] = parseVideoInfo(videoInfos[id], channelName)
 
   return ret
 
 
-def refreshChannel(channelId):
+def refreshChannel(channelId, channelName):
   playlistId = getUploadsPlaylist(channelId)
   playlistVideos = getPlaylistVideos(playlistId, count=None)
 
   videoInfo = getVideoInfo(playlistVideos)
 
   global videos
-  parsedInfo = parseVideoInfos(videoInfo)
+  parsedInfo = parseVideoInfos(videoInfo, channelName)
   beforeAttribs = sumAttribs(videos)
   videos = {**videos, **parsedInfo}
   attribs = sumAttribs(videos)
@@ -97,14 +97,15 @@ def refreshChannels():
     channel = channels[i]
     print("Channel {}/{}".format(i + 1, len(channels)))
     try:
-      print("Refreshing channel: {}".format(getChannelName(channel)))
+      channelName = getChannelName(channel)
+      print("Refreshing channel: {}".format(channelName))
     except Exception:
       print("ERROR: Cannot get the name of a channel at all, rest in pepperoni.")
       print("The victim is: {}".format(channel))
       print()
       continue
 
-    refreshChannel(channel)
+    refreshChannel(channel, channelName)
     print()
 
 
