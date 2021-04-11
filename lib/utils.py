@@ -76,6 +76,7 @@ def printMatch(videos, attrib, value, exact=True):
   elif len(matches) == 0:
     print("No matches.")
     return
+  print("NOTICE: Due to Alice's termination, the following playlist might not work, in that case try to remove the first video id until it works.")
   print("Playlist: https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
 
 
