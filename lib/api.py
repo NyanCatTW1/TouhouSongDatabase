@@ -78,22 +78,13 @@ def parseVideoInfos(videoInfos):
 
 
 def refreshChannel(channelId):
-  print("Acquiring channel playlist id")
   playlistId = getUploadsPlaylist(channelId)
-  print("Received {}".format(playlistId))
-
-  print("Listing video in playlist")
   playlistVideos = getPlaylistVideos(playlistId, count=None)
-  print("Received {} id{}".format(len(playlistVideos), s(len(playlistVideos))))
 
-  print("Receiving video description{}".format(s(len(playlistVideos))))
   videoInfo = getVideoInfo(playlistVideos)
 
-  print("Parsing video description{}".format(s(len(videoInfo))))
-  parsedInfo = parseVideoInfos(videoInfo)
-
-  print("Updating database")
   global videos
+  parsedInfo = parseVideoInfos(videoInfo)
   beforeAttribs = sumAttribs(videos)
   videos = {**videos, **parsedInfo}
   attribs = sumAttribs(videos)
@@ -110,6 +101,7 @@ def refreshChannels():
     except Exception:
       print("ERROR: Cannot get the name of a channel at all, rest in pepperoni.")
       print("The victim is: {}".format(channel))
+      print()
       continue
 
     refreshChannel(channel)
