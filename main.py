@@ -59,11 +59,12 @@ def main():
       print("0. Query the database")
       print("1. Attempt to find the lyrics for a video in comment section (YouTube API key needed)")
       print("2. List info about a video in the database")
+      print("7. Update just the last added channel's info (YouTube API key needed, used to save API quota)")
       print("8. Update the database (YouTube API key needed)")
       print("9: Leave")
       try:
         optionChose = int(input("Choose: "))
-        assert optionChose in [0, 1, 2, 8, 9]
+        assert optionChose in [0, 1, 2, 7, 8, 9]
         break
       except Exception:
         print("Invalid option! Try again")
@@ -82,6 +83,8 @@ def main():
       except Exception:
         continue
       listVideoInfo(videoId)
+    elif optionChose == 7:
+      api.updateDatabase(True)
     elif optionChose == 8:
       api.updateDatabase()
     elif optionChose == 9:

@@ -22,7 +22,7 @@ channels = ["UCshG1-oUuFknWjXp5U1P9xw", "UCjchy66Q6XBGOTSj-jwNy1Q", "UCmC13e647V
             "UCC22yriBfflJdSSBqdLItxQ", "UCKhgKi54I4NlLyyzdLAEbhg", "UCAXFRF9HF0TM2KBnDD-ENhQ",
             "UCx7IooUYRipwOIVJSK0e5ug", "UC7eotbkZxg1GDJT6-8xSOCg", "UC0INc3mUY3QG6-8nnnz7yXA",
             "UCyNA3mQpMAQ59wn0A4uMb5w", "UC4VV8oMlE1A7HEm-hLL5jOg", "UCEddH3sFwOD0AUohA7S06Gg",
-            "UC2pRD-iKpUas0o1PSlRLKPg", "UCXUd33vRPGZcfb8pngQpVlQ"]
+            "UC2pRD-iKpUas0o1PSlRLKPg", "UCXUd33vRPGZcfb8pngQpVlQ", "UCVODOPBpytFipYx8iFVZfJA"]
 
 
 def ensureAPI():
@@ -93,8 +93,8 @@ def refreshChannel(channelId, channelName):
   dbStatus(videos)
 
 
-def refreshChannels():
-  for i in range(len(channels)):
+def refreshChannels(justLast):
+  for i in range(len(channels) - 1 if justLast else 0, len(channels)):
     channel = channels[i]
     print("Channel {}/{}".format(i + 1, len(channels)))
     try:
@@ -110,9 +110,9 @@ def refreshChannels():
     print()
 
 
-def updateDatabase():
+def updateDatabase(justLast=False):
   ensureAPI()
-  refreshChannels()
+  refreshChannels(justLast)
   save(videos)
 
 
