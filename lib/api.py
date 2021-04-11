@@ -21,7 +21,7 @@ channels = ["UCshG1-oUuFknWjXp5U1P9xw", "UCjchy66Q6XBGOTSj-jwNy1Q", "UCmC13e647V
             "UC9-rPU1iBlhZZhaftiez0qA", "UC0eulKoXGBeZORzk5-N6n0A", "UCU-QbDlDekATodksv-CNMbg",
             "UCC22yriBfflJdSSBqdLItxQ", "UCKhgKi54I4NlLyyzdLAEbhg", "UCAXFRF9HF0TM2KBnDD-ENhQ",
             "UCx7IooUYRipwOIVJSK0e5ug", "UC7eotbkZxg1GDJT6-8xSOCg", "UC0INc3mUY3QG6-8nnnz7yXA",
-            "UCyNA3mQpMAQ59wn0A4uMb5w"]
+            "UCyNA3mQpMAQ59wn0A4uMb5w", "UC4VV8oMlE1A7HEm-hLL5jOg"]
 
 
 def ensureAPI():
