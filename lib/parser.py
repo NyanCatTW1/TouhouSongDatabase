@@ -99,6 +99,9 @@ def patchInfo(info):
   # jSjUwprO0ok
   info = info.replace("Site:", "Website:").replace("Illust:", "Illustration:")
 
+  # T6rFlUUKumY
+  info = info.replace("Illust：", "Illustration：").replace("Original Composer:", "").replace("Original Composer：", "")
+
   return info
 
 
@@ -134,10 +137,10 @@ def detectMultiline(lines, keyword):
   begin = False
   for line in lines:
     if not begin:
-      if keyword in line:
+      if "Original" in line and any(sep in line for sep in seperators):
         begin = True
         ret.append(stripKeyword(line, keyword))
-    elif len(line.strip()) > 0 and not any(sep in line for sep in seperators):
+    elif len(line.strip()) > 0 and ((not any(sep in line for sep in seperators)) or "Original" in line):
       ret.append(line.strip())
     else:
       break
