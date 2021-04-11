@@ -52,9 +52,14 @@ def commonAttribValues(videos, target):
   return descendingDict(count)
 
 
+deadChannels = ["Alice Margatroid"]
+
+
 def printMatch(videos, attrib, value, exact=True):
   matches = []
   for video in videos.keys():
+    if "Channel" not in videos[video] or videos[video]["Channel"] in deadChannels:
+      continue
     if attrib in videos[video]:
       match = False
       if isinstance(videos[video][attrib], list):
@@ -69,6 +74,8 @@ def printMatch(videos, attrib, value, exact=True):
           match = True
 
       if match:
+        if len(matches) == 0:
+          print("\nResults:")
         print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
         matches.append(video)
   if len(matches) > 50:
@@ -76,7 +83,8 @@ def printMatch(videos, attrib, value, exact=True):
   elif len(matches) == 0:
     print("No matches.")
     return
-  print("NOTICE: Due to Alice's termination, the following playlist might not work, in that case try to remove the first video id until it works.")
+  print()
+  print("NOTICE: Videos from dead channels are automatically hidden.")
   print("Playlist: https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
 
 
