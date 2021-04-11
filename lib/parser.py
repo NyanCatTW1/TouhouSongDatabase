@@ -3,9 +3,9 @@
 global commonInfos
 commonInfos = ["Title", "Channel", "Artist", "Vocal", "Arrangement",
                "Lyric", "Circle", "Album", "Release Date", "Translation",
-               "Original artist", "Original source", "Remix", "Website", "Background Image",
-               "Illustration", "Guitar", "Source", "Length", "Event",
-               "Genre", "Character"]
+               "Original artist", "Original source", "Remix", "Website", "Original",
+               "Background Image", "Illustration", "Guitar", "Source", "Length",
+               "Event", "Genre", "Character"]
 seperators = ["：", ":", " - "]
 
 
