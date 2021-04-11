@@ -14,7 +14,7 @@ def patchInfo(info):
   info = info.replace("Released Date", "Release Date")
 
   # l4GQYBI4DBM
-  info = info.replace("track name", "Title").replace("arranged by", "Arrangement").replace("album", "Album")
+  info = info.replace("track name", "Title").replace("arranged by", "Arrangement").replace("album:", "Album:")
 
   # uSgHhzcvHfM
   info = info.replace("Vo:", "Vocal:").replace("Arrange", "Arrangement")
@@ -89,6 +89,9 @@ def patchInfo(info):
 
   # 0QtGIK1fS4k
   info = info.replace("Publisher：", "Circle：").replace("Album Genre：", "Genre：").replace("Picture Artist：", "Illustration：")
+
+  # 4m5q-NMfYIE
+  info = info.replace("circle:", "Circle:").replace("translation:", "Translation:").replace("image:", "Illustration:")
 
   return info
 
