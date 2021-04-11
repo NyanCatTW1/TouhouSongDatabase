@@ -2,6 +2,13 @@ import romkan
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
 
+global deadChannels
+deadChannels = ["Alice Margatroid"]
+
+
+def deadVideo(videoId, videos):
+  return "Channel" not in videos[videoId] or videos[videoId]["Channel"] in deadChannels
+
 
 def s(num, suffix="s"):
   return suffix if num > 1 else ""
@@ -25,8 +32,11 @@ def descendingDict(dict):
 
 def commonAttribs(videos):
   count = {}
-  for video in videos.values():
-    for attrib in video:
+  for videoId in videos.keys():
+    if deadVideo(videoId, videos):
+      continue
+
+    for attrib in videos[videoId]:
       if attrib not in count:
         count[attrib] = 1
       else:
@@ -36,7 +46,11 @@ def commonAttribs(videos):
 
 def commonAttribValues(videos, target):
   count = {}
-  for video in videos.values():
+  for videoId in videos.keys():
+    if deadVideo(videoId, videos):
+      continue
+
+    video = videos[videoId]
     if target in video:
       if isinstance(video[target], list):
         for value in video[target]:
@@ -52,14 +66,12 @@ def commonAttribValues(videos, target):
   return descendingDict(count)
 
 
-deadChannels = ["Alice Margatroid"]
-
-
 def printMatch(videos, attrib, value, exact=True):
   matches = []
   for video in videos.keys():
-    if "Channel" not in videos[video] or videos[video]["Channel"] in deadChannels:
+    if deadVideo(video, videos):
       continue
+
     if attrib in videos[video]:
       match = False
       if isinstance(videos[video][attrib], list):
