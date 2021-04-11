@@ -103,6 +103,7 @@ def parseVideoId(url):
     parsed = parse_qs(urlparse.urlparse(url).query)['v'][0]
     return parsed
   except Exception:
+    url = url.split('/')[-1]
     if len(url) == 11:
       return url
     else:
