@@ -4,6 +4,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib"))
 import api
 from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId
+from parser import commonInfos
 
 
 def promptVideoId():
@@ -16,10 +17,11 @@ def promptVideoId():
 
 def listVideoInfo(videoId):
   if videoId in api.videos:
-    for attrib in api.videos[videoId]:
-      value = api.videos[videoId][attrib]
+    for attrib in commonInfos:
+      if attrib in api.videos[videoId]:
+        value = api.videos[videoId][attrib]
 
-      print("{}: {}".format(attrib, '\n'.join(value) if isinstance(value, list) else value))
+        print("{}: {}".format(attrib, '\n'.join(value) if isinstance(value, list) else value))
   else:
     print("Error: Video id is not in the database :(")
 
