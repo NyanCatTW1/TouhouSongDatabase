@@ -99,7 +99,9 @@ def refreshChannel(channelId):
 
 
 def refreshChannels():
-  for channel in channels:
+  for i in range(len(channels)):
+    channel = channels[i]
+    print("Channel {}/{}".format(i + 1, len(channels)))
     try:
       print("Refreshing channel: {}".format(getChannelName(channel)))
     except Exception:
