@@ -1,7 +1,7 @@
 from pyyoutube import Api
 from math import ceil
-from utils import s, sumAttribs, dbStatus, toRomaji
-from parser import parseVideoInfo
+from utils import s, sumAttribs, dbStatus, toRomaji, romkanAvail
+from parsing import parseVideoInfo
 from db import load, save
 
 global api
@@ -130,7 +130,11 @@ def getVideoComment(videoId):
 def findLyrics(videoId):
   ensureAPI()
   comments = getVideoComment(videoId)
-  return "\n".join(map(toRomaji, max(comments, key=len)))
+  if romkanAvail:
+    return "\n".join(map(toRomaji, max(comments, key=len)))
+  else:
+    print("WARNING: Romkan is not installed, keeping the gojuons as-is.")
+    return "\n".join(max(comments, key=len))
 
 
 videos = load()

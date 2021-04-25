@@ -1,4 +1,8 @@
-import romkan
+try:
+  import romkan
+  romkanAvail = True
+except ImportError:
+  romkanAvail = False
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
 
@@ -97,7 +101,7 @@ def printMatch(videos, attrib, value, exact=True):
     return
   print()
   print("NOTICE: Videos from dead channels are automatically hidden.")
-  print("Playlist: https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
+  print("Playlist:\nhttps://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
 
 
 def toRomaji(line):

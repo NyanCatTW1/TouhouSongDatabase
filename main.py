@@ -4,7 +4,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib"))
 import api
 from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId
-from parser import commonInfos
+from parsing import commonInfos
 
 
 def promptVideoId():
