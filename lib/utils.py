@@ -5,6 +5,7 @@ except ImportError:
   romkanAvail = False
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
+import pyperclip
 
 global deadChannels
 deadChannels = ["Alice Margatroid"]
@@ -100,8 +101,13 @@ def printMatch(videos, attrib, value, exact=True):
     print("No matches.")
     return
   print()
-  print("NOTICE: Videos from dead channels are automatically hidden.")
-  print("Playlist:\nhttps://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50])))
+  print("NOTICE: Videos from dead channels are automatically hidden, but sometimes the playlist still wouldn't work. In that case, remove the first video id from the link and try again.")
+
+  playlistURL = "https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50]))
+  print("Playlist:\n{}".format(playlistURL))
+  if "y" in input("Copy the playlist URL above to the clipboard? (n) "):
+    pyperclip.copy(playlistURL)
+    print("Copied to clipboard.")
 
 
 def toRomaji(line):
