@@ -6,6 +6,7 @@ except ImportError:
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
 import pyperclip
+from random import shuffle
 
 global deadChannels
 deadChannels = ["Alice Margatroid"]
@@ -96,13 +97,14 @@ def printMatch(videos, attrib, value, exact=True, aliveOnly=True):
         print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
         matches.append(video)
   if len(matches) > 50:
-    print("WARNING: There are more than 50 matches, the playlist below will be limited to first 50 matches.")
+    print("WARNING: There are more than 50 matches, the playlist below will include 50 random videos from the matches.")
   elif len(matches) == 0:
     print("No matches.")
     return
   print()
   print("Sometimes the playlist wouldn't work because the first video is unavailable.\nIn that case, remove the first video id from the link and try again.")
 
+  shuffle(matches)
   playlistURL = "https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50]))
   print("Playlist:\n{}".format(playlistURL))
   if "y" in input("Copy the playlist URL above to the clipboard? (n) ").lower():
