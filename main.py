@@ -27,7 +27,9 @@ def listVideoInfo(videoId):
 
 
 def query():
-  attribs = commonAttribs(api.videos)
+  aliveOnly = "n" not in input("Exclude unavailable videos? (y) ").lower()
+
+  attribs = commonAttribs(api.videos, aliveOnly=aliveOnly)
   attribChose = choose(attribs)
 
   while True:
@@ -42,13 +44,13 @@ def query():
       print("Invalid option! Try again")
 
   if optionChose == 0:
-    attribValues = commonAttribValues(api.videos, attribs[attribChose][0])
+    attribValues = commonAttribValues(api.videos, attribs[attribChose][0], aliveOnly=aliveOnly)
     valueChose = choose(attribValues)
 
-    printMatch(api.videos, attribs[attribChose][0], attribValues[valueChose][0])
+    printMatch(api.videos, attribs[attribChose][0], attribValues[valueChose][0], aliveOnly=aliveOnly)
   elif optionChose == 1:
     target = input("Search for: ")
-    printMatch(api.videos, attribs[attribChose][0], target, False)
+    printMatch(api.videos, attribs[attribChose][0], target, exact=False, aliveOnly=aliveOnly)
 
 
 def main():

@@ -35,10 +35,10 @@ def descendingDict(dict):
   return sorted(list(dict.items()), key=lambda x: x[1], reverse=True)
 
 
-def commonAttribs(videos):
+def commonAttribs(videos, aliveOnly=True):
   count = {}
   for videoId in videos.keys():
-    if deadVideo(videoId, videos):
+    if aliveOnly and deadVideo(videoId, videos):
       continue
 
     for attrib in videos[videoId]:
@@ -49,10 +49,10 @@ def commonAttribs(videos):
   return descendingDict(count)
 
 
-def commonAttribValues(videos, target):
+def commonAttribValues(videos, target, aliveOnly=True):
   count = {}
   for videoId in videos.keys():
-    if deadVideo(videoId, videos):
+    if aliveOnly and deadVideo(videoId, videos):
       continue
 
     video = videos[videoId]
@@ -71,10 +71,10 @@ def commonAttribValues(videos, target):
   return descendingDict(count)
 
 
-def printMatch(videos, attrib, value, exact=True):
+def printMatch(videos, attrib, value, exact=True, aliveOnly=True):
   matches = []
   for video in videos.keys():
-    if deadVideo(video, videos):
+    if aliveOnly and deadVideo(video, videos):
       continue
 
     if attrib in videos[video]:
@@ -101,11 +101,11 @@ def printMatch(videos, attrib, value, exact=True):
     print("No matches.")
     return
   print()
-  print("NOTICE: Videos from dead channels are automatically hidden, but sometimes the playlist still wouldn't work. In that case, remove the first video id from the link and try again.")
+  print("Sometimes the playlist wouldn't work because the first video is unavailable.\nIn that case, remove the first video id from the link and try again.")
 
   playlistURL = "https://www.youtube.com/watch_videos?video_ids={}".format(",".join(matches[:50]))
   print("Playlist:\n{}".format(playlistURL))
-  if "y" in input("Copy the playlist URL above to the clipboard? (n) "):
+  if "y" in input("Copy the playlist URL above to the clipboard? (n) ").lower():
     pyperclip.copy(playlistURL)
     print("Copied to clipboard.")
 
