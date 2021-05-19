@@ -9,7 +9,7 @@ import pyperclip
 from random import shuffle
 
 global deadChannels
-deadChannels = ["Alice Margatroid"]
+deadChannels = ["Alice Margatroid", "Touhou Kanjiru"]
 
 
 def deadVideo(videoId, videos):
