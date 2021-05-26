@@ -8,12 +8,12 @@ from urllib.parse import parse_qs
 import pyperclip
 from random import shuffle
 
-global deadChannels
-deadChannels = ["Alice Margatroid", "Touhou Kanjiru"]
+global metaKeys
+metaKeys = ["deadVids"]
 
 
 def deadVideo(videoId, videos):
-  return "Channel" not in videos[videoId] or videos[videoId]["Channel"] in deadChannels
+  return videoId in videos["deadVids"]
 
 
 def s(num, suffix="s"):
@@ -39,6 +39,8 @@ def descendingDict(dict):
 def commonAttribs(videos, aliveOnly=True):
   count = {}
   for videoId in videos.keys():
+    if videoId in metaKeys:
+      continue
     if aliveOnly and deadVideo(videoId, videos):
       continue
 
@@ -53,6 +55,8 @@ def commonAttribs(videos, aliveOnly=True):
 def commonAttribValues(videos, target, aliveOnly=True):
   count = {}
   for videoId in videos.keys():
+    if videoId in metaKeys:
+      continue
     if aliveOnly and deadVideo(videoId, videos):
       continue
 
@@ -75,6 +79,8 @@ def commonAttribValues(videos, target, aliveOnly=True):
 def printMatch(videos, attrib, value, exact=True, aliveOnly=True):
   matches = []
   for video in videos.keys():
+    if video in metaKeys:
+      continue
     if aliveOnly and deadVideo(video, videos):
       continue
 
@@ -96,6 +102,7 @@ def printMatch(videos, attrib, value, exact=True, aliveOnly=True):
           print("\nResults:")
         print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
         matches.append(video)
+  print("Found {} match{}".format(len(matches), s(len(matches), "es")))
   if len(matches) > 50:
     print("WARNING: There are more than 50 matches, the playlist below will include 50 random videos from the matches.")
   elif len(matches) == 0:

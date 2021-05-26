@@ -97,8 +97,11 @@ def refreshChannel(channelId, channelName):
   print("{} attribute{} added".format(attribs - beforeAttribs, s(attribs - beforeAttribs), ))
   dbStatus(videos)
 
+  return parsedInfo
+
 
 def refreshChannels(justLast):
+  deadVids = set(videos.keys())
   for i in range(len(channels) - 1 if justLast else 0, len(channels)):
     channel = channels[i]
     print("Channel {}/{}".format(i + 1, len(channels)))
@@ -111,8 +114,11 @@ def refreshChannels(justLast):
       print()
       continue
 
-    refreshChannel(channel, channelName)
+    deadVids -= set(refreshChannel(channel, channelName).keys())
     print()
+  if not justLast:
+    print("Marking {} videos as dead videos :(".format(len(deadVids)))
+    videos["deadVids"] = list(deadVids)
 
 
 def updateDatabase(justLast=False):

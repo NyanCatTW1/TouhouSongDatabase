@@ -167,7 +167,7 @@ parsers = [
   lambda lines, channelName: commonDetection(lines, commonInfos, channelName),
   lambda lines, channelName: detectMultiline(lines, "Original"),
   lambda lines, channelName: illustrationParser(lines),
-  lambda lines, channelName: {"Channel": channelName}
+  lambda lines, channelName: {"Channel": channelName, "Raw Description": lines}
 ]
 
 

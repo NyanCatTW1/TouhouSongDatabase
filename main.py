@@ -17,6 +17,14 @@ def promptVideoId():
 
 def listVideoInfo(videoId):
   if videoId in api.videos:
+    if "Raw Description" in api.videos[videoId]:
+      print("Raw Description:")
+      print("\n".join(api.videos[videoId]["Raw Description"]))
+      print("\n\n", end="")
+      print("--- End of raw description ---")
+      print("\n\n", end="")
+
+    print("Extracted Infos:\n")
     for attrib in commonInfos:
       if attrib in api.videos[videoId]:
         value = api.videos[videoId][attrib]
