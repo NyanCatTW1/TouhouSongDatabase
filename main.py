@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib"))
 import api
-from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId, reparseAll, findDescOnScarletDevil
+from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId, reparseAll, findDescOnScarletDevil, findDescOnPlayboard
 from parsing import commonInfos
 from db import save
 
@@ -100,11 +100,12 @@ def main():
         print("0. Update the database (YouTube API key needed)")
         print("1. Update just the last added channel's info (YouTube API key needed, used to save API quota)")
         print("2. Search for missing raw desc datas on https://scarletdevil.org/youtube/")
+        print("3. Search for missing raw desc datas on https://playboard.co/")
         print("4. Reparse all video descriptions")
         print("9. I'm just looking around (Leave)")
         try:
           optionChose = int(input("Choose: "))
-          assert optionChose in [0, 1, 2, 4, 9]
+          assert optionChose in [0, 1, 2, 3, 4, 9]
           break
         except Exception:
           print("Invalid option! Try again")
@@ -119,6 +120,14 @@ Enter exactly 'Yes' to proceed: """) != "Yes":
           continue
         api.videos = reparseAll(findDescOnScarletDevil(api.videos))
         save(api.videos)
+      elif optionChose == 3:
+        if input("""Please notice that by scraping Playboard for raw descs, you're violating Playboard's ToS, which might not be acceptable for your taste.
+(plus, Nyan Cat aka. The developer probably already tried every video against the website, so it doesn't make sense to do it again)
+Enter exactly 'Yes' to proceed: """) != "Yes":
+          continue
+        api.videos = reparseAll(findDescOnPlayboard(api.videos))
+        save(api.videos)
+        pass
       elif optionChose == 4:
         api.videos = reparseAll(api.videos)
         save(api.videos)
