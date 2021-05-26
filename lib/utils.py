@@ -7,6 +7,7 @@ import urllib.parse as urlparse
 from urllib.parse import parse_qs
 import pyperclip
 from random import shuffle
+from parsing import parseVideoInfo
 
 global metaKeys
 metaKeys = ["deadVids"]
@@ -147,3 +148,23 @@ def parseVideoId(url):
       return url
     else:
       raise ValueError
+
+
+def reparseAll(videos):
+  print("Before reparse:")
+  dbStatus(videos)
+
+  i = 1
+  for videoId in videos.keys():
+    if i % 1000 == 0:
+      print("Parsing video {}".format(i))
+    i += 1
+    if "Raw Description" not in videos[videoId]:
+      if videoId not in metaKeys and "Channel" not in videos[videoId]:
+        videos[videoId]["Channel"] = "Alice Margatroid"
+      continue
+    videos[videoId] = parseVideoInfo("\n".join(videos[videoId]["Raw Description"]), videos[videoId]["Channel"])
+
+  print("After reparse:")
+  dbStatus(videos)
+  return videos
