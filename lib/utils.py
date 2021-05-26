@@ -8,6 +8,10 @@ from urllib.parse import parse_qs
 import pyperclip
 from random import shuffle
 from parsing import parseVideoInfo
+import requests
+from bs4 import BeautifulSoup
+import traceback
+
 
 global metaKeys
 metaKeys = ["deadVids"]
@@ -167,4 +171,44 @@ def reparseAll(videos):
 
   print("After reparse:")
   dbStatus(videos)
+  return videos
+
+
+def vidsWithoutRawDesc(videos):
+  ret = []
+  for videoId in videos:
+    if videoId not in metaKeys and "Raw Description" not in videos[videoId]:
+      ret.append(videoId)
+  return ret
+
+
+def findDescOnScarletDevil(videos):
+  todos = vidsWithoutRawDesc(videos)
+  i = 0
+  win = 0
+  lose = 0
+  for videoId in todos:
+    url = "https://scarletdevil.org/youtube/video.php?v={}".format(videoId)
+    print("Fetching {} ({:.1f}%)".format(url, i / len(todos) * 100))
+    i += 1
+
+    try:
+      page = requests.get(url)
+      soup = BeautifulSoup(page.content, 'html.parser')
+      tables = soup.find_all("table")
+      if len(tables) >= 2:
+        desc = tables[1].find_all("td")[-1].decode_contents()
+        desc = desc.replace("<br/>", "").replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+        videos[videoId]["Raw Description"] = desc.split("\n")
+        print("Bravo!")
+        win += 1
+      else:
+        print("No record here! :(")
+        lose += 1
+    except Exception:
+      traceback.print_exc()
+      print("Maybe next time...")
+      lose += 1
+
+    print("{} win{} and {} lose{} ({:.1f}% success rate)\n".format(win, s(win), lose, s(lose), win / (win + lose) * 100))
   return videos

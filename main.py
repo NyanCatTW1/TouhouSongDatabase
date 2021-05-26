@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib"))
 import api
-from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId, reparseAll
+from utils import commonAttribs, commonAttribValues, choose, printMatch, parseVideoId, reparseAll, findDescOnScarletDevil
 from parsing import commonInfos
 from db import save
 
@@ -99,11 +99,12 @@ def main():
         optionChose = -1
         print("0. Update the database (YouTube API key needed)")
         print("1. Update just the last added channel's info (YouTube API key needed, used to save API quota)")
-        print("5. Reparse all video descriptions")
+        print("2. Search for missing raw desc datas on https://scarletdevil.org/youtube/")
+        print("4. Reparse all video descriptions")
         print("9. I'm just looking around (Leave)")
         try:
           optionChose = int(input("Choose: "))
-          assert optionChose in [0, 1, 5, 9]
+          assert optionChose in [0, 1, 2, 4, 9]
           break
         except Exception:
           print("Invalid option! Try again")
@@ -111,7 +112,14 @@ def main():
         api.updateDatabase()
       elif optionChose == 1:
         api.updateDatabase(True)
-      elif optionChose == 5:
+      elif optionChose == 2:
+        if input("""Please notice that this will send hundreds of requests to someone's maybe self-hosted server, so please don't proceed if you found that bad.
+(plus, Nyan Cat aka. The developer probably already tried every video against the archive, so it doesn't make sense to do it again)
+Enter exactly 'Yes' to proceed: """) != "Yes":
+          continue
+        api.videos = reparseAll(findDescOnScarletDevil(api.videos))
+        save(api.videos)
+      elif optionChose == 4:
         api.videos = reparseAll(api.videos)
         save(api.videos)
       elif optionChose == 9:
