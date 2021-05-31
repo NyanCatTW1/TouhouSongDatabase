@@ -127,7 +127,9 @@ def commonDetection(lines, keywords, channelName):
       if keyword not in ret and keyword in line:
         if mengYueWorkaround and i < 2:
           continue
-        ret[keyword] = stripKeyword(line, keyword)
+        parsed = stripKeyword(line, keyword)
+        if len(parsed) > 0:
+          ret[keyword] = parsed
 
   return ret
 
