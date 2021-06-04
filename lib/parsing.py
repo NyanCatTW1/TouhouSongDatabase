@@ -102,6 +102,9 @@ def patchInfo(info):
   # T6rFlUUKumY
   info = info.replace("Illust：", "Illustration：").replace("Original Composer:", "").replace("Original Composer：", "")
 
+  # R8keaV4EDp8
+  info = info.replace("illustration：", "Illustration：")
+
   return info
 
 
