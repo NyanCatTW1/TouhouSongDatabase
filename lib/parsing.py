@@ -10,6 +10,10 @@ seperators = ["：", ":", " - "]
 
 
 def patchInfo(info):
+  # -uIgSe40BaM
+  # I can't imagine such an exception occured.
+  info = info.replace("Lyricss", "Lyric")
+
   # sRvtSH1_H0w
   info = info.replace("Released Date", "Release Date")
 
@@ -30,6 +34,9 @@ def patchInfo(info):
 
   # 6zG5hmr-RvY
   info = info.replace("image", "Image").replace("Image", "Illustration").replace("歌詞／Lyric", "")
+
+  # Turns out we replaced quite some URL by accident
+  info = info.replace("/Illustration/", "/image/").replace("-Illustration/", "-image/") .replace("Illustration.", "image.")
 
   # l_rBFAJo1e0
   info = info.replace("Song:", "Title:")
