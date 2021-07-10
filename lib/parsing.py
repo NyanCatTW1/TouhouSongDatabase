@@ -4,8 +4,8 @@ global commonInfos
 commonInfos = ["Title", "Channel", "Artist", "Vocal", "Arrangement",
                "Lyric", "Circle", "Album", "Release Date", "Translation",
                "Original artist", "Original source", "Remix", "Website", "Original",
-               "Background Image", "Illustration", "Guitar", "Bass", "Drum",
-               "Source", "Length", "Event", "Genre", "Character"]
+               "Illustration", "Guitar", "Bass", "Drum", "Source",
+               "Length", "Event", "Genre", "Character"]
 seperators = ["：", ":", " - "]
 
 
@@ -29,9 +29,7 @@ def patchInfo(info):
   info = info.replace("Arranger", "Arrangement").replace("Remixed by", "Remix").replace("Picture source", "Illustration")
 
   # 6zG5hmr-RvY
-  # A dirty workaround, but it'll have to do for now.
-  info = info.replace("background image", "Background Image").replace("Image", "Illustration") \
-             .replace("Background Illustration", "Background Image").replace("歌詞／Lyric", "")
+  info = info.replace("image", "Image").replace("Image", "Illustration").replace("歌詞／Lyric", "")
 
   # l_rBFAJo1e0
   info = info.replace("Song:", "Title:")
@@ -93,7 +91,7 @@ def patchInfo(info):
   info = info.replace("Publisher：", "Circle：").replace("Album Genre：", "Genre：").replace("Picture Artist：", "Illustration：")
 
   # 4m5q-NMfYIE
-  info = info.replace("circle:", "Circle:").replace("translation:", "Translation:").replace("image:", "Illustration:")
+  info = info.replace("circle:", "Circle:").replace("translation:", "Translation:")
 
   # y30xoRA25jM
   info = info.replace("Release event:", "Event:").replace("Pics:", "Illustration:")

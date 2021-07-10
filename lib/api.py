@@ -99,7 +99,7 @@ def refreshChannel(channelId, channelName):
   beforeAttribs = sumAttribs(videos)
   videos = {**videos, **parsedInfo}
   attribs = sumAttribs(videos)
-  print("{} attribute{} added".format(attribs - beforeAttribs, s(attribs - beforeAttribs), ))
+  print("{} attribute{}".format(attribs - beforeAttribs, s(attribs - beforeAttribs)))
   dbStatus(videos)
 
   return parsedInfo

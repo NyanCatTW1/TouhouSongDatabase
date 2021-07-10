@@ -22,7 +22,7 @@ def deadVideo(videoId, videos):
 
 
 def s(num, suffix="s"):
-  return suffix if num > 1 else ""
+  return suffix if abs(num) > 1 else ""
 
 
 def sumAttribs(dict):
