@@ -23,9 +23,6 @@ def patchInfo(info):
   # uSgHhzcvHfM
   info = info.replace("Vo:", "Vocal:").replace("Arrange:", "Arrangement:").replace("Arrange：", "Arrangement：")
 
-  # _lA8C48FlDw
-  info = info.replace("( ", "(").replace(" )", ")")
-
   # -OzNzdlsocw
   info = info.replace("Vocals", "Vocal").replace("Lyrics", "Lyric").replace("Artwork", "Illustration")
 
