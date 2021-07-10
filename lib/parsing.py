@@ -29,7 +29,9 @@ def patchInfo(info):
   info = info.replace("Arranger", "Arrangement").replace("Remixed by", "Remix").replace("Picture source", "Illustration")
 
   # 6zG5hmr-RvY
-  info = info.replace("Image", "Illustration").replace("background image", "Background Image").replace("歌詞／Lyric", "")
+  # A dirty workaround, but it'll have to do for now.
+  info = info.replace("background image", "Background Image").replace("Image", "Illustration") \
+             .replace("Background Illustration", "Background Image").replace("歌詞／Lyric", "")
 
   # l_rBFAJo1e0
   info = info.replace("Song:", "Title:")
@@ -56,10 +58,10 @@ def patchInfo(info):
   info = info.replace("Album Genre:", "Genre:").replace("Illustration Source:", "Illustration:")
 
   # lCQ7WuYXIHg
-  info = info.replace("TITLE:", "Title:").replace("lyrics:", "Lyrics:").replace("Original title:", "Original:")
+  info = info.replace("TITLE:", "Title:").replace("lyrics:", "Lyric:").replace("Original title:", "Original:")
 
   # hRmrbi8wDb0
-  info = info.replace("Vocals by:", "Vocal:").replace("Lyrics by:", "Lyrics:").replace("Arrangement by:", "Arrangement:")\
+  info = info.replace("Vocals by:", "Vocal:").replace("Lyrics by:", "Lyric:").replace("Arrangement by:", "Arrangement:")\
              .replace("Album name:", "Album:").replace("Circle name:", "Circle:").replace("Original Song", "Original")\
              .replace("Picture by:", "Illustration:")
 
