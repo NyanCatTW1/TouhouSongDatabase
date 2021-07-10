@@ -123,7 +123,7 @@ def refreshChannels(justLast):
     print()
   if not justLast:
     print("Marking {} videos as dead videos :(".format(len(deadVids)))
-    videos["deadVids"] = list(deadVids)
+    videos["deadVids"] = sorted(list(deadVids))
 
 
 def updateDatabase(justLast=False):
