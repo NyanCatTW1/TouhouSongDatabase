@@ -32,7 +32,11 @@ channels = ["UCshG1-oUuFknWjXp5U1P9xw", "UCjchy66Q6XBGOTSj-jwNy1Q", "UCmC13e647V
             "UC8sD3GQrTbJTMMp_NU9sdag", "UCIRjbgsjh_iu_vSl9dtwIDg", "UCG-Gza8DUZOTGVp1ZYqKqjQ",
             "UCqfxtogFDBa6QzsuhG9mFbw", "UCgY9jsdQQa0DkCx07cGR8yA", "UCA54HCOWOdw7uZgMy3XJg4Q",
             "UCxup3fupRQvocZixof9Y7Vg", "UCatxW9eXbvzkCTgySV-Pkmg", "UCsh5TdVoO51_DjGyCFIhZsg",
-            "UC_Xwjtx2RaFFgSsTHKoNJZw"]
+            "UC_Xwjtx2RaFFgSsTHKoNJZw", "UCH5eXZroElnUOU1OzDJ5kpA", "UCPXfv8dD8nb1wMrODHBUiCQ",
+            "UC9kKbLwjNc77YtDXST2dQoA", "UCFohkT_899sWXxwF8XS9vrg", "UCycjmrRpDoLY0p_rHeLDCRw",
+            "UCko4y6fHRBhMhi0K-yJkRtA", "UCZMUB-dbevPjtPKyYkdMBHw", "UCM-3e8i702nLqVGNTblCNBg",
+            "UCNiFJB7rnZvFkFalFVvuTpg", "UC1OJqJdDeGywaN_TttPlG4A", "UChPsCwzLIghlUKodG5zijfA",
+            "UClCoOKHdiUZJ3sBV3Wj0n-w", "UC2-DHbDj_X6oUR4brWm9sIg", "UCOS4OtvY59wq6kHIdIJVMkg"]
 
 
 def ensureAPI():
