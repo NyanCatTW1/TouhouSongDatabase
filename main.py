@@ -97,10 +97,11 @@ def main():
         print("2. Search for missing raw desc datas on https://scarletdevil.org/youtube/")
         print("3. Search for missing raw desc datas on https://playboard.co/")
         print("4. Reparse all video descriptions")
+        print("5. List database-missing channels in playlist")
         print("9. I'm just looking around (Leave)")
         try:
           optionChose = int(input("Choose: "))
-          assert optionChose in [0, 1, 2, 3, 4, 9]
+          assert optionChose in [0, 1, 2, 3, 4, 5, 9]
           break
         except Exception:
           print("Invalid option! Try again")
@@ -126,6 +127,12 @@ Enter exactly 'Yes' to proceed: """) != "Yes":
       elif optionChose == 4:
         api.videos = utils.reparseAll(api.videos)
         db.save(api.videos)
+      elif optionChose == 5:
+        try:
+          playlistId = promptPlaylistId()
+        except Exception:
+          continue
+        api.listMissingChannels(playlistId)
       elif optionChose == 9:
         print("Okay!")
     elif optionChose == 9:

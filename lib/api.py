@@ -90,6 +90,8 @@ def getVideoInfo(videoId, mode="description"):
         ret[item["id"]] += "\nTitle:{}".format(item["snippet"]["title"])
       elif mode == "isUnavailable":
         ret[item["id"]] = item["status"]["uploadStatus"] in ["rejected", "deleted"]
+      elif mode == "snippet":
+        ret[item["id"]] = item["snippet"]
 
     count += len(videosToCheck)
     print("Progress {}/{}".format(count, len(videoId)))
@@ -196,6 +198,28 @@ def listVideoInfo(videoId):
         print("{}: {}".format(attrib, '\n'.join(value) if isinstance(value, list) else value))
   else:
     print("Error: Video id is not in the database :(")
+
+
+def listMissingChannels(playlistId):
+  ensureAPI()
+  print("Loading playlist")
+  playlistVideos = getPlaylistVideos(playlistId)
+  missingVideos = [vid for vid in playlistVideos if vid not in videos]
+  missingVideoInfos = getVideoInfo(missingVideos, "snippet")
+  missingChannels = {}
+  for video in missingVideos:
+    missingChannel = missingVideoInfos[video]["channelTitle"]
+    if missingChannel in missingChannels:
+      missingChannels[missingChannel].append(video)
+    else:
+      missingChannels[missingChannel] = [video]
+
+  missingChannels = sorted(list(missingChannels.items()), key=lambda x: len(x[1]), reverse=True)
+  for i in range(len(missingChannels) - 1, -1, -1):
+    channel = missingChannels[i]
+    print(f"\n{missingVideoInfos[channel[1][0]]['channelId']} ({channel[0]}) with {len(channel[1])} entries:")
+    for video in channel[1]:
+      print(f"{video}: {missingVideoInfos[video]['title']}")
 
 
 videos = db.load()
