@@ -7,7 +7,7 @@ import urllib.parse as urlparse
 from urllib.parse import parse_qs
 import pyperclip
 from random import shuffle
-from parsing import parseVideoInfo
+import parsing
 import requests
 from bs4 import BeautifulSoup
 import traceback
@@ -154,6 +154,19 @@ def parseVideoId(url):
       raise ValueError
 
 
+def parsePlaylistId(url):
+  url = url.strip()
+  try:
+    parsed = parse_qs(urlparse.urlparse(url).query)['list'][0]
+    return parsed
+  except Exception:
+    url = url.split('=')[-1]
+    if len(url) == 34:
+      return url
+    else:
+      raise ValueError
+
+
 def reparseAll(videos):
   print("Before reparse:")
   dbStatus(videos)
@@ -167,7 +180,7 @@ def reparseAll(videos):
       if videoId not in metaKeys and "Channel" not in videos[videoId]:
         videos[videoId]["Channel"] = "Alice Margatroid"
       continue
-    videos[videoId] = parseVideoInfo("\n".join(videos[videoId]["Raw Description"]), videos[videoId]["Channel"])
+    videos[videoId] = parsing.parseVideoInfo("\n".join(videos[videoId]["Raw Description"]), videos[videoId]["Channel"])
 
   print("After reparse:")
   dbStatus(videos)

@@ -1,8 +1,8 @@
 from pyyoutube import Api
 from math import ceil
-from utils import s, sumAttribs, dbStatus, toRomaji, romkanAvail
-from parsing import parseVideoInfo
-from db import load, save
+import utils
+import parsing
+import db
 
 global api
 
@@ -70,17 +70,28 @@ def getUploadsPlaylist(channelId):
   return response.items[0].to_dict()["contentDetails"]["relatedPlaylists"]["uploads"]
 
 
-def getVideoInfo(videoId):
+def getVideoInfo(videoId, mode="description"):
   ret = {}
+
+  if mode == "isUnavailable":
+    for vid in videoId:
+      ret[vid] = True
+
   count = 0
   splits = ceil(len(videoId) / 50)
 
   for i in range(splits):
-    response = api.get_video_by_id(video_id=videoId[i * 50:(i + 1) * 50], parts="snippet")
+    videosToCheck = videoId[i * 50:(i + 1) * 50]
+    response = api.get_video_by_id(video_id=videosToCheck, parts="snippet,status")
+
     for item in response.to_dict()["items"]:
-      ret[item["id"]] = item["snippet"]["description"]
-      ret[item["id"]] += "\nTitle:{}".format(item["snippet"]["title"])
-    count += len(response.to_dict()["items"])
+      if mode == "description":
+        ret[item["id"]] = item["snippet"]["description"]
+        ret[item["id"]] += "\nTitle:{}".format(item["snippet"]["title"])
+      elif mode == "isUnavailable":
+        ret[item["id"]] = item["status"]["uploadStatus"] in ["rejected", "deleted"]
+
+    count += len(videosToCheck)
     print("Progress {}/{}".format(count, len(videoId)))
 
   return ret
@@ -89,7 +100,7 @@ def getVideoInfo(videoId):
 def parseVideoInfos(videoInfos, channelName):
   ret = {}
   for id in videoInfos.keys():
-    ret[id] = parseVideoInfo(videoInfos[id], channelName)
+    ret[id] = parsing.parseVideoInfo(videoInfos[id], channelName)
 
   return ret
 
@@ -102,11 +113,11 @@ def refreshChannel(channelId, channelName):
 
   global videos
   parsedInfo = parseVideoInfos(videoInfo, channelName)
-  beforeAttribs = sumAttribs(videos)
+  beforeAttribs = utils.sumAttribs(videos)
   videos = {**videos, **parsedInfo}
-  attribs = sumAttribs(videos)
-  print("{} attribute{}".format(attribs - beforeAttribs, s(attribs - beforeAttribs)))
-  dbStatus(videos)
+  attribs = utils.sumAttribs(videos)
+  print("{} attribute{}".format(attribs - beforeAttribs, utils.s(attribs - beforeAttribs)))
+  utils.dbStatus(videos)
 
   return parsedInfo
 
@@ -135,7 +146,7 @@ def refreshChannels(justLast):
 def updateDatabase(justLast=False):
   ensureAPI()
   refreshChannels(justLast)
-  save(videos)
+  db.save(videos)
 
 
 def getVideoComment(videoId):
@@ -149,15 +160,45 @@ def getVideoComment(videoId):
 def findLyrics(videoId):
   ensureAPI()
   comments = getVideoComment(videoId)
-  if romkanAvail:
-    return "\n".join(map(toRomaji, max(comments, key=len)))
+  if utils.romkanAvail:
+    return "\n".join(map(utils.toRomaji, max(comments, key=len)))
   else:
     print("WARNING: Romkan is not installed, keeping the gojuons as-is.")
     return "\n".join(max(comments, key=len))
 
 
-videos = load()
+def listUnavailVideos(playlistId):
+  ensureAPI()
+  print("Loading playlist")
+  playlistVideos = getPlaylistVideos(playlistId)
+  isUnavailable = getVideoInfo(playlistVideos, "isUnavailable")
+  for videoId in playlistVideos:
+    if isUnavailable[videoId]:
+      print()
+      print(videoId)
+      listVideoInfo(videoId)
 
+
+def listVideoInfo(videoId):
+  if videoId in videos:
+    if "Raw Description" in videos[videoId]:
+      print("Raw Description:")
+      print("\n".join(videos[videoId]["Raw Description"]))
+      print("\n\n", end="")
+      print("--- End of raw description ---")
+      print("\n\n", end="")
+
+    print("Extracted Infos:\n")
+    for attrib in parsing.commonInfos:
+      if attrib in videos[videoId]:
+        value = videos[videoId][attrib]
+
+        print("{}: {}".format(attrib, '\n'.join(value) if isinstance(value, list) else value))
+  else:
+    print("Error: Video id is not in the database :(")
+
+
+videos = db.load()
 if __name__ == "__main__":
   # updateDatabase()
   pass

@@ -1,13 +1,13 @@
 import json
 import os
-from utils import dbStatus
+import utils
 
 
 def load():
   try:
     with open(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "videos.json")) as f:
       data = json.load(f)
-      dbStatus(data)
+      utils.dbStatus(data)
       return data
   except Exception:
     return {}
