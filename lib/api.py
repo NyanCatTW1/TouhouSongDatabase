@@ -38,7 +38,17 @@ channels = ["UCshG1-oUuFknWjXp5U1P9xw", "UCjchy66Q6XBGOTSj-jwNy1Q", "UCmC13e647V
             "UCNiFJB7rnZvFkFalFVvuTpg", "UC1OJqJdDeGywaN_TttPlG4A", "UChPsCwzLIghlUKodG5zijfA",
             "UClCoOKHdiUZJ3sBV3Wj0n-w", "UC2-DHbDj_X6oUR4brWm9sIg", "UCOS4OtvY59wq6kHIdIJVMkg",
             "UCZOl5e0tSXhBXIDBaNw5olg", "UCgBPVgZ1E-YvjWv3REWN8cQ", "UCJU4Xqsjk_yOJ8Zzk71s9YA",
-            "UCcEY6zn99AdeaZyVQzdnTjQ"]
+            "UCcEY6zn99AdeaZyVQzdnTjQ", "UCOxvBvlRGKjf0ZWfVEdneKA", "UCmzieQGdu7fTXaPqi2AuXyg",
+            "UCXPZV8w2XFt7AB-09Vv6HRA", "UCluuXfMJnQNP-kVVUiSJFjA", "UCOYm_W5mJpuGiXP1Js5iWKg",
+            "UCK3dyS7DXjL2DkdoY2S14qA", "UCTkYivm5YbMEgKxBkVcFMxA", "UCcWmtIyfqR1W1YM6s6mkJrg",
+            "UCXjYACN9b8gFDjktdoM6Vsg", "UCw2dzq4tmOfmdlJ4BcqdB-g", "UC4eeT9Tk17WecKmB3IptMTw",
+            "UCH8oqutMsRDNEhjHUEg1byQ", "UC1oG3SdlNPj_WrokDgtpljQ", "UCs4mPLlKyNtcy9D5re7SiAg",
+            "UCCvXKzGv2_ty6w63HlzRpXg", "UCDIynh-WsLUBvXPsuTanAyA", "UC12mhuWNxrKqfXp9gtuc9AQ",
+            "UCifpQcwydJ29yy4SUIEze7A", "UCLFHojnludnHhDPD3Pd9D5w", "UC9w1XHM5bgcSjWkatRFALVQ",
+            "UCXf7VjJBX-kdKirgPB75k-Q", "UCHYr4LIVJMQOhbASKEcEB4A", "UCobQWeFdIl30jL22LhgVlXw",
+            "UCDtfZsfsS0051YaZZq7_Kvg", "UCZaFfDBBCqmYdfp6DJl0cRw", "UCliG2TPBFMc6zweohklZxFQ",
+            "UClryipE7m83IsRzMZIFYZog", "UCwxJHsVS3AbmhtaHPiKL5LA", "UC41_taiskgxKxIahMh9tkDQ",
+            "UClyS_I-vg5bDhVyNKiLMmRg", "UCWUscGy-Om5tF4Qzgqw5RkQ"]
 
 
 def ensureAPI():
@@ -174,11 +184,16 @@ def listUnavailVideos(playlistId):
   print("Loading playlist")
   playlistVideos = getPlaylistVideos(playlistId)
   isUnavailable = getVideoInfo(playlistVideos, "isUnavailable")
+  foundUnavail = False
   for videoId in playlistVideos:
     if isUnavailable[videoId]:
+      foundUnavail = True
       print()
       print(videoId)
       listVideoInfo(videoId)
+
+  if not foundUnavail:
+    print("No unavailable video :)")
 
 
 def listVideoInfo(videoId):
@@ -216,8 +231,9 @@ def listMissingChannels(playlistId):
 
   missingChannels = sorted(list(missingChannels.items()), key=lambda x: len(x[1]), reverse=True)
   for i in range(len(missingChannels) - 1, -1, -1):
+    print(f"\n{i + 1}/{len(missingChannels)}")
     channel = missingChannels[i]
-    print(f"\n{missingVideoInfos[channel[1][0]]['channelId']} ({channel[0]}) with {len(channel[1])} entries:")
+    print(f"{missingVideoInfos[channel[1][0]]['channelId']} ({channel[0]}) with {len(channel[1])} entries:")
     for video in channel[1]:
       print(f"{video}: {missingVideoInfos[video]['title']}")
 
