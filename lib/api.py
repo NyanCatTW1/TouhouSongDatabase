@@ -48,7 +48,63 @@ channels = ["UCshG1-oUuFknWjXp5U1P9xw", "UCjchy66Q6XBGOTSj-jwNy1Q", "UCmC13e647V
             "UCXf7VjJBX-kdKirgPB75k-Q", "UCHYr4LIVJMQOhbASKEcEB4A", "UCobQWeFdIl30jL22LhgVlXw",
             "UCDtfZsfsS0051YaZZq7_Kvg", "UCZaFfDBBCqmYdfp6DJl0cRw", "UCliG2TPBFMc6zweohklZxFQ",
             "UClryipE7m83IsRzMZIFYZog", "UCwxJHsVS3AbmhtaHPiKL5LA", "UC41_taiskgxKxIahMh9tkDQ",
-            "UClyS_I-vg5bDhVyNKiLMmRg", "UCWUscGy-Om5tF4Qzgqw5RkQ"]
+            "UClyS_I-vg5bDhVyNKiLMmRg", "UCWUscGy-Om5tF4Qzgqw5RkQ", "UCL2pzDHH5R4SBseer6LzZgQ",
+            "UCH_OIt0LOq6tzMFCWPklzfA", "UCzeXtGfstqeyVlBarK5py6w", "UCTm6zEcFMSwg0YIHz_kHWUQ",
+            "UCGYS2uHZDe7OrWMHGALyMBA", "UCYVjEJTsWwyVMj4PlNiqw-Q", "UCKED5Effuo4JBLMcCFz3f7A",
+            "UC-4rnwopoXPfAxjGNne7Qdw", "UCJXLJItr-Df2kEzjw9zK9Zw", "UCePhgw937vNfaEsiOanRwrg",
+            "UCBbTjim6kQjev2cINipTGqQ", "UCPbBNbVA__M26QNPcZpmEFw", "UC-5KkXAuPHXdH_INNLuUrzQ",
+            "UCMuD7BbrFB37Bgz_WD-x3sg", "UC6KkUgqpzEawrar09X8I7Kg", "UCF986nFCHZOyAVAsDaws1aw",
+            "UCAa6VsGtCS-Lp1rkI71D87w", "UCR42ReY4PBLQ_ikQEDLtkyA", "UC8JphMRO2l5YG4AOqORIWoQ",
+            "UCxQoSFjwhkgiX4SB1KHJ3HA", "UCRlg4rOfcd9qNHl-b8Lo3mA", "UCdBld4m6Fmf-w_awu6z7uwg",
+            "UC6YbCZ_7Tpu-vDMtLXuawUg", "UCOGH61XggnYbpi3L_8GG9AA", "UCXcyBpIiPEOHEIASwzXOCaQ",
+            "UCOW6lZ4HIgDvf-7PKGZw_2Q", "UCbkVNxi7A8ML3XSjjzAjV4w", "UC7NPav4TGitQ3uaSSwdeAcg",
+            "UCX32-dV-qPstLofHlFlXRJg", "UCgBbQxdGcWYp8j6R37TOP_w", "UCmy1plJtTEZTh9gfazDKmmA",
+            "UCtqb6o4ZJtaiiYs8jWQv3KA", "UCReJoGphaRP9d14fHC6eu0g", "UCrDiWiURNUf79KyDXmozZGA",
+            "UCpS6NLfH0oEeUcxBGBqFOag", "UC6A4DERfqf1L_Pn0fOcIwHQ", "UCcyiw_47etTV7P92tw7-alw",
+            "UC3JYZ_oIMLGauc1yOAjfVgQ", "UCofqT4H0_QEMEJB0lGwaL_A", "UC63uMcsj1SrvY888zE1_jRw",
+            "UCeh7_R0iecRMpZTCBOx19XQ", "UCP1F4RFaopR2jNLjnLQG3Gw", "UCh5Dxz2HEE-Iuwc1cHhtl7g",
+            "UCJgxWX7TJV5quBr49d_MqIg", "UC14G5tdSndPhP47RTVgMXcg", "UC3ZeGZLTV6VaKh2yx1VRbAQ",
+            "UC463VG2kjGikqlJRPzCCh2g", "UCK5WLZQn5GZO9odKd1oUAhQ", "UC1r9uqAI99qJfa2lj3usFSQ",
+            "UCwFpvQ9GPigjxX2B8Jru0zQ", "UCXdi-J2w2f_wxjIBL9ZrbRw", "UC6HQbj-37w2Jow67wDVn_vg",
+            "UC3VU58V9zwfgWqDoPt1s5AA", "UCIbh42ATHgD3ODWWyt7P7Xg", "UCVQr6MoZCqQIwTl1TwpKnTA",
+            "UCiPe1meneF3eVCZbMiMtc1g", "UC2WQonFKaZC2i5-_wPYSGYg", "UCeygl8F6T5k9q7MmdY9X65w",
+            "UC4OmX_nlQRwJPj4y3UYkN1g", "UCs9oFe-kzczjIecbYcfN-bw", "UCEGwLdIdeCIjHnVERq746Gw",
+            "UCUG7Z3ozKOZzcCqMh_A1O-w", "UCLOsEGB9duVUZv8q3PaI_2Q", "UCiCYykHUOUjJkFlGI_i-DPQ",
+            "UCLnTA9VdFeIT0QSTHfIQGNw", "UCrWU3gAVf9Fym_FubxVTw0Q", "UCa189ED1RFOLfR-R0zAOAkg",
+            "UCzopDs3umvneOr451NF7nSw", "UCqTyUF9P4Vk3ay8IAeo8c0w", "UCD7oZ0qW7fqjoBRJG0cCUsg",
+            "UCSd7ccLUkv6qcn87V_Kt1jg", "UCmZcxSP36QJUwIbvSvHdwfA", "UC5DECrDVnJ-QpRT4NzSYd-Q",
+            "UC591n3CAjupKnHsiwSdoWBA", "UCAYiUxZMQDndWg-kimBA29w", "UCSr5v0JxAcxpSAf9chFWOjQ",
+            "UCs6zEQqRBPhM73iA8EapfNg", "UCYswMnCSVAKg4cfIU4syiSA", "UCcCQvI0oKj5imADP7mJ0ZQg",
+            "UCen4sbgvxLuBZAMtg_TQCxA", "UCifClZHixbW0vSictyLA7SQ", "UCBj8s04R5oBJuGfw7JJWs7g",
+            "UCv3Jwi7q83fZOEnkUEZImmw", "UCoPvwNQwMw5NkXRYpbz7Pdw", "UCJz43jy4gRpS4oIaZaqJJ5Q",
+            "UCyIIb5XcpLXXjnncIkDn66A", "UCLf5H3XCoPFZLfQC5Bs0wIQ", "UCAoOjtXrfbuJBAi_IZ7HKHA",
+            "UCreek7glsOcf2N39KU5jqVw", "UCcnmMvyAC5JvTixmyhRkaDw", "UCVryTXmHWqjFn4kWTDhr6SQ",
+            "UCHdlmPC9SSAPG235-LS40zg", "UCC6WApQ-zTtdRJzav_HjYtA", "UC_Bx6Wk4RT6rziVAbY8m2PQ",
+            "UCSjsU1EClnUefsrEA22OFVw", "UCAivv9aNt0CkPdAOP1klo6w", "UCHdyugDq1itT-vXgh10m4og",
+            "UCEa3dfRiraKzprddMukaR4g", "UColNv-n4PTIj92065IlVEHQ", "UC7c_LFgZMAZvAwvlSs3ELgg",
+            "UCiWeDUcMkwZVXH6dSPFR52w", "UCZOU4fqAcTCcK8Qw3P7WADA", "UCRcdpNGSmZuDV8lkHUdBQ1g",
+            "UCVySjaO3SrmyTWfos6uRp3w", "UCDiqn-ylh1wtPjX0PUE5QDw", "UCnA0zvPnznbO3VR59CK7CGA",
+            "UCnntWYn5ZCOUzS4o16TFa5g", "UCWz82fO4huvZzbyQj2lx4AA", "UC7KQ8VFWSjHfFLF81DUfJMA",
+            "UC_FwGXTh7fnS2EuDCtG6M3g", "UCMw08t4waZniQ4knQxW7J9g", "UCAnMJr9tHnvRlWHS4AdJ_vQ",
+            "UCMW6LPAo_8AjsQ0sXIC37dw", "UCowjNOBEk7l5zZd5jV92t_g", "UCMIeqmpXxRukOZcZkcfiXbw",
+            "UC-GK-y1OSPYze1hFLlGn-RQ", "UCz9Lx_m6XjKLxdtpOb1lUEA", "UC9HL7Z1L6Y6AOtBbneq8xPw",
+            "UCYXu1-TpwHiWLZL__xvEozQ", "UC6NdySmxURBpAe-R7eb7DRQ", "UCdhONd6VbXlOn_4WQmWNkUQ",
+            "UCEjX8BAq9aOjcv5iWkTdqQA", "UCnV29g1yx68QBcYDwgw1r0g", "UCB8M-AYVYDdILQzxEZ4275w",
+            "UCGFU3gA5U5Xnh-RFiuhGrhA", "UCDSwgKofPaI2VdNbwtVmQkw", "UCl1JtIGlroqe3QDKqdsZhAA",
+            "UCPovzIif8nd2Pdf3uA5RLjw", "UCwQ4T2ek4cVteMIPdPBTetQ", "UC6f0cEEzUvNkWe0TEfX17ig",
+            "UCln8cPlELXlF3OOtoh_OL2w", "UC_x7Tur1KRO9xv_BKtJdpWQ", "UCgXEKwmwxeAw9W9W-x60IRQ",
+            "UCwatDtLh8_bi0PyWJwOAevg", "UCv8Jg3cB2_gG5cks2hp0dKA", "UC_9Zcjk97DOs7la67xAKk_g",
+            "UCTuEKrpwGXKCA3xwCQLdU3g", "UCRhGAquCakhpCGtKejQBmzA", "UC6jNKaitSOC056LcIkYU03w",
+            "UCeerukkGl5vcGLImVuu93pQ", "UCYbitrkXRXEdjrGddF9QzHw", "UCxBnDJ9lDONE8jtoWLkxP0A",
+            "UCMQZsV95kBnwV3K8S081V8w", "UCyCpL5mXy4u-v4jgFXmeV2A", "UCcm6e4JxyDHZXI08T7eHfsg",
+            "UCo_SResbauNJzb0r3mV6gzw", "UCQo-7lyQnDdGw7BBUp8GkSw", "UC3B2aF-PAZTVEK7QHyckFqg",
+            "UCbfNO47deTMvTmOXpD4An1A", "UCwYaz87bqztuYppZOCbOcdg", "UC7BepxxYVhaO2-FwIewHfog",
+            "UCpuj3e81wCrs5GnnusPwKCw", "UCIBbq-lHCQgNVEcaSFG0xEA", "UCJvBFPywyGag0DSDiU1mdYg",
+            "UC7D8eGJ3qvhyZcmRXayILTw", "UCpUbaJ8ptuNscnoRuVpW19g", "UCK3hjbTeAfLzhhJG6dv_jKQ",
+            "UCrOxGHS-Qpf_al0e7k8Ri9Q", "UCnD8BvElDV_qT77yluT0BIw", "UCBoa2RN-qkTdK_e6jfjfM6g",
+            "UCmAHXT-xknqEkAsVMGUEwMw", "UCneFRe-GYie3SCKml2OYaPA", "UCCk2IHYtEEEcF1yhT3fSJ4g",
+            "UCkj6LN8MHRGt0zDTnW_LG-Q", "UCWvQIAF-sKUXSd9Rhan5pcw", "UCbuo6sPQ-ZWU7lrF2O76Jqg",
+            "UCmbGUsUceTr2Cz8m_7OjwMg", "UC5dgy2UFUqmVY7maEz3BrLg"]
 
 
 def ensureAPI():
@@ -223,11 +279,15 @@ def listMissingChannels(playlistId):
   missingVideoInfos = getVideoInfo(missingVideos, "snippet")
   missingChannels = {}
   for video in missingVideos:
-    missingChannel = missingVideoInfos[video]["channelTitle"]
-    if missingChannel in missingChannels:
-      missingChannels[missingChannel].append(video)
-    else:
-      missingChannels[missingChannel] = [video]
+    try:
+      missingChannel = missingVideoInfos[video]["channelTitle"]
+      if missingChannel in missingChannels:
+        missingChannels[missingChannel].append(video)
+      else:
+        missingChannels[missingChannel] = [video]
+    except Exception:
+      # We hit an unavilable video
+      pass
 
   missingChannels = sorted(list(missingChannels.items()), key=lambda x: len(x[1]), reverse=True)
   for i in range(len(missingChannels) - 1, -1, -1):
@@ -236,6 +296,17 @@ def listMissingChannels(playlistId):
     print(f"{missingVideoInfos[channel[1][0]]['channelId']} ({channel[0]}) with {len(channel[1])} entries:")
     for video in channel[1]:
       print(f"{video}: {missingVideoInfos[video]['title']}")
+
+  code = ""
+  for i in range(len(missingChannels)):
+    if i % 3 == 0:
+      code += " " * 12
+    code += f'"{missingVideoInfos[missingChannels[i][1][0]]["channelId"]}",'
+    if i % 3 != 2:
+      code += " "
+    else:
+      code += "\n"
+  print(code)
 
 
 videos = db.load()
