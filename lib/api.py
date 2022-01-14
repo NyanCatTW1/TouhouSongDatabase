@@ -119,9 +119,12 @@ def ensureAPI():
 def getPlaylistVideos(playlistId, count=None):
   ret = []
 
-  response = api.get_playlist_items(playlist_id=playlistId, parts="contentDetails", count=count)
-  for item in response.to_dict()["items"]:
-    ret.append(item["contentDetails"]["videoId"])
+  try:
+    response = api.get_playlist_items(playlist_id=playlistId, parts="contentDetails", count=count)
+    for item in response.to_dict()["items"]:
+      ret.append(item["contentDetails"]["videoId"])
+  except Exception:
+    print("Failed to get playlist videos, is the list empty?")
 
   return ret
 
