@@ -53,7 +53,8 @@ def query():
     print("Warning: This will **eval** the code you enter, which could cause damage to your system if you do anything strange.")
     print("Please only enter codes that you fully understand.")
     print("Available attributes:")
-    print("[" + ", ".join([f'"{x}"' for x in parsing.commonInfos]) + "]")
+    print("[" + ", ".join([f'"{x}"' for x in parsing.commonInfos + ["Raw Description"]]) + "]")
+    print("You might also want to check videos.json to see how the raw data looks like.")
     print("\nExample query:")
     print('"ayo" in video["Vocal"].lower() and "ayaponzu" in video["Vocal"].lower()\n')
 
