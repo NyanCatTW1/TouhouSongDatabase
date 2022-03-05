@@ -126,9 +126,12 @@ def queryWithEval(videos, code, aliveOnly=True):
     video = videos[videoId]
 
     try:
-      if eval(code, globals(), locals()):
+      if eval(code, locals()):
         matches.append(videoId)
     except Exception:
+      if errors == 0:
+        traceback.print_exc()
+        print("Further errors will be hidden")
       errors += 1
 
     if i % 10000 == 0:
