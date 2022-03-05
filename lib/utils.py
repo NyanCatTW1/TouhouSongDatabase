@@ -143,7 +143,10 @@ def printMatch(videos, matches):
 
   print("\nResults:")
   for video in matches:
-    print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
+    try:
+      print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
+    except Exception:
+      print("https://youtu.be/{} - (Failed to get title)".format(video))
   print("Found {} match{}".format(len(matches), s(len(matches), "es")))
   if len(matches) > 50:
     print("WARNING: There are more than 50 matches, the playlist below will include 50 random videos from the matches.")
