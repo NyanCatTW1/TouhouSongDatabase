@@ -110,10 +110,9 @@ channels = ["UCshG1-oUuFknWjXp5U1P9xw", "UCjchy66Q6XBGOTSj-jwNy1Q", "UCmC13e647V
 
 def ensureAPI():
   global api
-  try:
-    api
+  if "api" in globals():
     print("API key in place, continuing...")
-  except NameError:
+  else:
     api = Api(api_key=input("Please enter a valid YouTube API key: "))
 
 

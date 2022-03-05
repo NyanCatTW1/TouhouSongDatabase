@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "li
 import api
 import utils
 import db
+import parsing
 
 
 def promptVideoId():
@@ -33,9 +34,10 @@ def query():
     print("Choose query method:")
     print("0. List all kinds of value and let me choose one")
     print("1. Find everything that matches my following input")
+    print("2. Let me enter Python code that queries the database")
     try:
       optionChose = int(input("Choose: "))
-      assert optionChose in [0, 1]
+      assert optionChose in [0, 1, 2]
       break
     except Exception:
       print("Invalid option! Try again")
@@ -43,11 +45,22 @@ def query():
   if optionChose == 0:
     attribValues = utils.commonAttribValues(api.videos, attribs[attribChose][0], aliveOnly=aliveOnly)
     valueChose = utils.choose(attribValues)
-
-    utils.printMatch(api.videos, attribs[attribChose][0], attribValues[valueChose][0], aliveOnly=aliveOnly)
+    matches = utils.queryWithAttrib(api.videos, attribs[attribChose][0], attribValues[valueChose][0], aliveOnly=aliveOnly)
   elif optionChose == 1:
     target = input("Search for: ")
-    utils.printMatch(api.videos, attribs[attribChose][0], target, exact=False, aliveOnly=aliveOnly)
+    matches = utils.queryWithAttrib(api.videos, attribs[attribChose][0], target, exact=False, aliveOnly=aliveOnly)
+  elif optionChose == 2:
+    print("Warning: This will **eval** the code you enter, which could cause damage to your system if you do anything strange.")
+    print("Please only enter codes that you fully understand.")
+    print("Available attributes:")
+    print("[" + ", ".join([f'"{x}"' for x in parsing.commonInfos]) + "]")
+    print("\nExample query:")
+    print('"ayo" in video["Vocal"].lower() and "ayaponzu" in video["Vocal"].lower()\n')
+
+    target = input("Enter your query: ")
+    matches = utils.queryWithEval(api.videos, target, aliveOnly=aliveOnly)
+
+  utils.printMatch(api.videos, matches)
 
 
 def main():

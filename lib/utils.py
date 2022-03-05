@@ -81,9 +81,11 @@ def commonAttribValues(videos, target, aliveOnly=True):
   return descendingDict(count)
 
 
-def printMatch(videos, attrib, value, exact=True, aliveOnly=True):
+def queryWithAttrib(videos, attrib, value, exact=True, aliveOnly=True):
   matches = []
+  i = 0
   for video in videos.keys():
+    i += 1
     if video in metaKeys:
       continue
     if aliveOnly and deadVideo(video, videos):
@@ -103,10 +105,45 @@ def printMatch(videos, attrib, value, exact=True, aliveOnly=True):
           match = True
 
       if match:
-        if len(matches) == 0:
-          print("\nResults:")
-        print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
         matches.append(video)
+
+      if i % 10000 == 0:
+        print(f"On video {i}...")
+  return matches
+
+
+def queryWithEval(videos, code, aliveOnly=True):
+  matches = []
+  i = 0
+  errors = 0
+  for videoId in videos.keys():
+    i += 1
+    if videoId in metaKeys:
+      continue
+    if aliveOnly and deadVideo(videoId, videos):
+      continue
+
+    video = videos[videoId]
+
+    try:
+      if eval(code, globals(), locals()):
+        matches.append(videoId)
+    except Exception:
+      errors += 1
+
+    if i % 10000 == 0:
+      print(f"On video {i}...")
+  print(f"{errors} error{s(errors)}")
+  return matches
+
+
+def printMatch(videos, matches):
+  if len(matches) == 0:
+    return
+
+  print("\nResults:")
+  for video in matches:
+    print("https://youtu.be/{} - {}".format(video, videos[video]["Title"]))
   print("Found {} match{}".format(len(matches), s(len(matches), "es")))
   if len(matches) > 50:
     print("WARNING: There are more than 50 matches, the playlist below will include 50 random videos from the matches.")
