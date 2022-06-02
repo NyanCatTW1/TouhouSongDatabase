@@ -3,6 +3,7 @@ from math import ceil
 import utils
 import parsing
 import db
+import tqdm
 
 global api
 
@@ -140,7 +141,7 @@ def getUploadsPlaylist(channelId):
   return response.items[0].to_dict()["contentDetails"]["relatedPlaylists"]["uploads"]
 
 
-def getVideoInfo(videoId, mode="description"):
+def getVideoInfo(videoId, mode="description", useTqdm=False):
   ret = {}
 
   if mode == "isUnavailable":
@@ -164,7 +165,12 @@ def getVideoInfo(videoId, mode="description"):
         ret[item["id"]] = item["snippet"]
 
     count += len(videosToCheck)
-    print("Progress {}/{}".format(count, len(videoId)))
+
+    toPrint = "Progress {}/{}".format(count, len(videoId))
+    if useTqdm:
+        tqdm.tqdm.write(toPrint)
+    else:
+        print(toPrint)
 
   return ret
 
@@ -177,41 +183,47 @@ def parseVideoInfos(videoInfos, channelName):
   return ret
 
 
-def refreshChannel(channelId, channelName):
+def refreshChannel(channelId, channelName, useTqdm=False):
   playlistId = getUploadsPlaylist(channelId)
   playlistVideos = getPlaylistVideos(playlistId, count=None)
 
-  videoInfo = getVideoInfo(playlistVideos)
+  videoInfo = getVideoInfo(playlistVideos, useTqdm=useTqdm)
 
   global videos
   parsedInfo = parseVideoInfos(videoInfo, channelName)
   beforeAttribs = utils.sumAttribs(videos)
   videos = {**videos, **parsedInfo}
   attribs = utils.sumAttribs(videos)
-  print("{} attribute{}".format(attribs - beforeAttribs, utils.s(attribs - beforeAttribs)))
-  utils.dbStatus(videos)
+
+  toPrint = "{} attribute{}".format(attribs - beforeAttribs, utils.s(attribs - beforeAttribs))
+  if useTqdm:
+      tqdm.tqdm.write(toPrint)
+  else:
+      print(toPrint)
+
+  utils.dbStatus(videos, True)
 
   return parsedInfo
 
 
 def refreshChannels(justLast):
   deadVids = set(videos.keys())
-  for i in range(len(channels) - 1 if justLast else 0, len(channels)):
+  for i in tqdm.tqdm(range(len(channels) - 1 if justLast else 0, len(channels))):
     channel = channels[i]
-    print("Channel {}/{}".format(i + 1, len(channels)))
+    tqdm.tqdm.write("Channel {}/{}".format(i + 1, len(channels)))
     try:
       channelName = getChannelName(channel)
-      print("Refreshing channel: {}".format(channelName))
+      tqdm.tqdm.write("Refreshing channel: {}".format(channelName))
     except Exception:
-      print("ERROR: Cannot get the name of a channel at all, rest in pepperoni.")
-      print("The victim is: {}".format(channel))
-      print()
+      tqdm.tqdm.write("ERROR: Cannot get the name of a channel at all, rest in pepperoni.")
+      tqdm.tqdm.write("The victim is: {}".format(channel))
+      tqdm.tqdm.write("")
       continue
 
-    deadVids -= set(refreshChannel(channel, channelName).keys())
-    print()
+    deadVids -= set(refreshChannel(channel, channelName, True).keys())
+    tqdm.tqdm.write("")
   if not justLast:
-    print("Marking {} videos as dead videos :(".format(len(deadVids)))
+    tqdm.tqdm.write("Marking {} videos as dead videos :(".format(len(deadVids)))
     videos["deadVids"] = sorted(list(deadVids))
 
 

@@ -11,6 +11,7 @@ import parsing
 import requests
 from bs4 import BeautifulSoup
 import traceback
+import tqdm
 
 
 global metaKeys
@@ -32,9 +33,14 @@ def sumAttribs(dict):
   return ret
 
 
-def dbStatus(videos):
+def dbStatus(videos, useTqdm=False):
   attribs = sumAttribs(videos)
-  print("Storing {} attribute{} of {} video{} in the database".format(attribs, s(attribs), len(videos), s(len(videos))))
+
+  toPrint = "Storing {} attribute{} of {} video{} in the database".format(attribs, s(attribs), len(videos), s(len(videos)))
+  if useTqdm:
+    tqdm.tqdm.write(toPrint)
+  else:
+    print(toPrint)
 
 
 def descendingDict(dict):
